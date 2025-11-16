@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certifications | Zahra Khan | Robotics & AI Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-heading: #2d2d5a;
+      --secondary-text: #5a5a7d;
+      --accent-purple: #6a00ff;
+      --light-bg: #f5f5f7;
+      --white: #ffffff;
+      --link-hover: #4e00b0;
+      --icon-color: #6a00ff;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--secondary-text);
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--white) !important;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: var(--primary-heading) !important;
+    }
+    .nav-link {
+      font-weight: 600;
+      color: var(--secondary-text) !important;
+      margin: 0 15px;
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--accent-purple) !important;
+    }
+
+    /* Sections */
+    .section-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--primary-heading);
+      text-align: center;
+      margin-bottom: 60px;
+      padding-top: 60px;
+    }
+    .bg-white-section {
+      background-color: var(--white);
+      padding: 80px 0;
+      box-shadow: 0 0 20px rgba(0,0,0,0.03);
+      margin-bottom: 30px;
+    }
+
+    /* Certification Cards */
+    .certification-card {
+      background-color: var(--white);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      padding: 0;
+      margin-bottom: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .certification-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent-purple), #8a2be2);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .certification-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    }
+    .certification-card:hover::before {
+      transform: scaleX(1);
+    }
+    .certification-title {
+      font-weight: 800;
+      color: var(--accent-purple);
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    .certification-issuer {
+      font-weight: 600;
+      color: var(--primary-heading);
+      margin-bottom: 5px;
+    }
+    .certification-date {
+      color: var(--secondary-text);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+    .certification-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+    .certification-skill {
+      background-color: rgba(106, 0, 255, 0.1);
+      color: var(--accent-purple);
+      padding: 4px 12px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    /* Certificate Preview - Full width */
+    .certificate-preview {
+      width: 100%;
+      height: 280px;
+      overflow: hidden;
+      margin-bottom: 0;
+      position: relative;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+    .certificate-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .certification-card:hover .certificate-preview img {
+      transform: scale(1.05);
+    }
+    .view-certificate {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      background: rgba(106, 0, 255, 0.9);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .certification-card:hover .view-certificate {
+      opacity: 1;
+    }
+    
+    /* Card Content */
+    .certification-content {
+      padding: 25px;
+    }
+    
+    /* Category Filter */
+    .category-filter {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .filter-btn {
+      background-color: var(--white);
+      border: 2px solid var(--accent-purple);
+      color: var(--accent-purple);
+      padding: 8px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background-color: var(--accent-purple);
+      color: var(--white);
+    }
+
+    /* Certificate Modal */
+    .certificate-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      z-index: 1100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .certificate-modal.active {
+      display: flex;
+    }
+    .certificate-modal-content {
+      max-width: 95%;
+      max-height: 95%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .certificate-modal-content img {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 10px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+    .close-modal {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .close-modal:hover {
+      color: var(--accent-purple);
+    }
+    .certificate-details {
+      width: 100%;
+      text-align: center;
+      color: white;
+      margin-top: 20px;
+    }
+    .certificate-details h3 {
+      font-weight: 700;
+      margin-bottom: 5px;
+      font-size: 1.5rem;
+    }
+    .certificate-details p {
+      margin: 0;
+      opacity: 0.8;
+      font-size: 1.1rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary-heading);
+      color: var(--light-bg);
+      padding: 30px 0;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: var(--accent-purple);
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Full Image Certificate Styles (for certificates that show full image) */
+    .full-image-certificate .certificate-preview {
+      height: auto;
+      max-height: 350px;
+      border-radius: 15px 15px 0 0;
+    }
+    .full-image-certificate .certificate-preview img {
+      object-fit: contain;
+      background-color: #f8f8f8;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .category-filter {
+        flex-direction: column;
+        align-items: center;
+      }
+      .filter-btn {
+        width: 200px;
+      }
+      .certificate-modal-content {
+        max-width: 98%;
+      }
+      .certificate-preview {
+        height: 220px;
+      }
+      .full-image-certificate .certificate-preview {
+        max-height: 300px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .certificate-preview {
+        height: 180px;
+      }
+      .full-image-certificate .certificate-preview {
+        max-height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Zahra Khan</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#research">Research</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link active" href="certifications.html">Certifications</a></li>
+          <li class="nav-item"><a class="nav-link" href="cv.html" target="_blank">CV</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Certifications Section -->
+  <section class="bg-white-section">
+    <div class="container">
+      <h2 class="section-title">Professional Certifications</h2>
+      
+      <!-- Category Filter -->
+      <div class="category-filter">
+        <button class="filter-btn active" data-filter="all">All Certifications</button>
+        <button class="filter-btn" data-filter="ai-ml">AI & Machine Learning</button>
+        <button class="filter-btn" data-filter="robotics">Robotics</button>
+        <button class="filter-btn" data-filter="programming">Programming</button>
+        <button class="filter-btn" data-filter="cloud">Cloud & DevOps</button>
+        <button class="filter-btn" data-filter="tutoring">Tutoring</button>
+      </div>
+      
+      <div class="row" id="certifications-container">
+        <!-- Reinforcement Learning Specialization -->
+        <div class="col-lg-4 col-md-6" data-category="ai-ml">
+          <div class="certification-card" data-certificate="rl-certificate">
+            <div class="certificate-preview">
+              <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Reinforcement Learning Certificate">
+              <div class="view-certificate">View Full Certificate</div>
+            </div>
+            <div class="certification-content">
+              <h3 class="certification-title">Reinforcement Learning Specialization</h3>
+              <p class="certification-issuer">University of Alberta</p>
+              <p class="certification-date">Issued: 2023</p>
+              <p>Comprehensive specialization covering fundamentals of reinforcement learning, value functions, policy gradients, and multi-agent systems.</p>
+              <div class="certification-skills">
+                <span class="certification-skill">RL</span>
+                <span class="certification-skill">Q-Learning</span>
+                <span class="certification-skill">Policy Gradients</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Practical Reinforcement Learning -->
+        <div class="col-lg-4 col-md-6" data-category="ai-ml">
+          <div class="certification-card full-image-certificate" data-certificate="practical-rl-certificate">
+            <div class="certificate-preview">
+              <img src="images/rl-course.jpg" alt="Practical Reinforcement Learning Certificate">
+              <div class="view-certificate">View Full Certificate</div>
+            </div>
+            <div class="certification-content">
+              <h3 class="certification-title">Practical Reinforcement Learning</h3>
+              <p class="certification-issuer">Coventry University & SMME, NUST</p>
+              <p class="certification-date">Issued: June 9, 2023</p>
+              <p>Joint course on practical reinforcement learning techniques, covering real-world applications and implementations in collaboration between Coventry University and SMME, NUST.</p>
+              <div class="certification-skills">
+                <span class="certification-skill">Reinforcement Learning</span>
+                <span class="certification-skill">Practical RL</span>
+                <span class="certification-skill">AI Applications</span>
+                <span class="certification-skill">NUST</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Machine Learning -->
+        <div class="col-lg-4 col-md-6" data-category="ai-ml">
+          <div class="certification-card" data-certificate="ml-certificate">
+            <div class="certificate-preview">
+              <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Machine Learning Certificate">
+              <div class="view-certificate">View Full Certificate</div>
+            </div>
+            <div class="certification-content">
+              <h3 class="certification-title">Machine Learning</h3>
+              <p class="certification-issuer">Stanford University (Andrew Ng)</p>
+              <p class="certification-date">Issued: 2022</p>
+              <p>Comprehensive course covering supervised and unsupervised learning, neural networks, SVMs, and practical machine learning techniques.</p>
+              <div class="certification-skills">
+                <span class="certification-skill">Supervised Learning</span>
+                <span class="certification-skill">Neural Networks</span>
+                <span class="certification-skill">ML Algorithms</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Computer Vision -->
+        <div class="col-lg-4 col-md-6" data-category="ai-ml">
+          <div class="certification-card" data-certificate="cv-certificate">
+            <div class="certificate-preview">
+              <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Computer Vision Certificate">
+              <div class="view-certificate">View Full Certificate</div>
+            </div>
+            <div class="certification-content">
+              <h3 class="certification-title">Computer Vision</h3>
+              <p class="certification-issuer">OpenAI</p>
+              <p class="certification-date">Issued: 2023</p>
+              <p>Advanced course covering image processing, feature detection, object recognition, and deep learning approaches to computer vision.</p>
+              <div class="certification-skills">
+                <span class="certification-skill">Computer Vision</span>
+                <span class="certification-skill">Image Processing</span>
+                <span class="certification-skill">Deep Learning</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- ROS1 & ROS2 -->
+        <div class="col-lg-4 col-md-6" data-category="robotics">
+          <div class="certification-card" data-certificate="ros-certificate">
+            <div class="certificate-preview">
+              <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="ROS Certificate">
+              <div class="view-certificate">View Full Certificate</div>
+            </div>
+            <div class="certification-content">
+              <h3 class="certification-title">ROS1 & ROS2</h3>
+              <p class="certification-issuer">Robotics Backend</p>
+              <p class="certification-date">Issued: 2023</p>
+              <p>Comprehensive training in Robot Operating System fundamentals, including topics, services, actions, and simulation with Gazebo.</p>
+              <div class="certification-skills">
+                <span class="certification-skill">ROS</span>
+                <span class="certification-skill">Gazebo</span>
+                <span class="certification-skill">Robotics</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Modern Robotics -->
+        <div class="col-lg-4 col-md-6" data-category="robotics">
+          <div class="certification-card" data-certificate="modern-robotics-certificate">
+            <div class="certificate-preview">
+              <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Modern Robotics Certificate">
+              <div class="view-certificate">View Full Certificate</div>
+            </div>
+            <div class="certification-content">
+              <h3 class="certification-title">Modern Robotics: Mechanics, Planning, and Control</h3>
+              <p class="certification-issuer">Northwestern University</p>
+              <p class="certification-date">Issued: 2023</p>
+              <p>Specialization covering robot kinematics, dynamics, motion planning, and control algorithms for modern robotic systems.</p>
+              <div class="certification-skills">
+                <span class="certification-skill">Robot Kinematics</span>
+                <span class="certification-skill">Motion Planning</span>
+                <span class="certification-skill">Control Systems</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- da Vinci Research Kit Part 1 -->
+        <div class="col-lg-4 col-md-6" data-category="robotics">
+          <div class="certification-card full-image-certificate" data-certificate="dvrk-part1-certificate">
+            <div class="certificate-preview">
+              <img src="images/certif1.jpg" alt="da Vinci Research Kit Part 1 Certificate">
+              <div class="view-certificate">View Full Certificate</div>
+            </div>
+            <div class="certification-content">
+              <h3 class="certification-title">da Vinci Research Kit Workshop (Part 1)</h3>
+              <p class="certification-issuer">NUST SMME & Johns Hopkins University</p>
+              <p class="certification-date">Issued: August 29, 2024</p>
+              <p>Workshop on da Vinci Research Kit (dVRK) and the World of Medical Robotics at SMME, NUST.</p>
+              <div class="certification-skills">
+                <span class="certification-skill">Medical Robotics</span>
+                <span class="certification-skill">dVRK</span>
+                <span class="certification-skill">Surgical Robotics</span>
+                <span class="certification-skill">NUST</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- da Vinci Research Kit Part 2 -->
+        <div class="col-lg-4 col-md-6" data-category="robotics">
+          <div class="certification-card full-image-certificate" data-certificate="dvrk-part2-certificate">
+            <div class="certificate-preview">
+              <img src="images/certi2.jpg" alt="da Vinci Research Kit Part 2 Certificate">
+              <div class="view-certificate">View Full Certificate</div>
+            </div>
+            <div class="certification-content">
+              <h3 class="certification-title">da Vinci Research Kit Workshop (Part 2)</h3>
+              <p class="certification-issuer">NUST SMME & Johns Hopkins University</p>
+              <p class="certification-date">Issued: November 13, 2024</p>
+              <p>Advanced workshop on da Vinci Research Kit (dVRK) and Medical Robotics at SMME, NUST.</p>
+              <div class="certification-skills">
+                <span class="certification-skill">Medical Robotics</span>
+                <span class="certification-skill">dVRK</span>
+                <span class="certification-skill">Surgical Robotics</span>
+                <span class="certification-skill">NUST</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Python Programming -->
+        <div class="col-lg-4 col-md-6" data-category="programming">
+          <div class="certification-card" data-certificate="python-certificate">
+            <div class="certificate-preview">
+              <img src="https://images.unsplash.com/photo-1526379094608-2c205cb8cb6d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Python Certificate">
+              <div class="view-certificate">View Full Certificate</div>
+            </div>
+            <div class="certification-content">
+              <h3 class="certification-title">Python Programming</h3>
+              <p class="certification-issuer">MIT</p>
+              <p class="certification-date">Issued: 2022</p>
+              <p>Comprehensive course covering Python fundamentals, data structures, algorithms, and object-oriented programming for technical applications.</p>
+              <div class="certification-skills">
+                <span class="certification-skill">Python</span>
+                <span class="certification-skill">Data Structures</span>
+                <span class="certification-skill">Algorithms</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- C++ Programming -->
+        <div class="col-lg-4 col-md-6" data-category="programming">
+          <div class="certification-card" data-certificate="cpp-certificate">
+            <div class="certificate-preview">
+              <img src="https://images.unsplash.com/photo-1575089976121-8ed7b2a54265?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="C++ Certificate">
+              <div class="view-certificate">View Full Certificate</div>
+            </div>
+            <div class="certification-content">
+              <h3 class="certification-title">Coding for Everyone: C and C++</h3>
+              <p class="certification-issuer">University of California, Santa Cruz</p>
+              <p class="certification-date">Issued: 2022</p>
+              <p>Specialization providing deep understanding of computer programming by learning to code, debug, and solve complex problems with C and C++.</p>
+              <div class="certification-skills">
+                <span class="certification-skill">C++</span>
+                <span class="certification-skill">C Programming</span>
+                <span class="certification-skill">Debugging</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- AWS Machine Learning -->
+        <div class="col-lg-4 col-md-6" data-category="cloud">
+          <div class="certification-card" data-certificate="aws-certificate">
+            <div class="certificate-preview">
+              <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="AWS Certificate">
+              <div class="view-certificate">View Full Certificate</div>
+            </div>
+            <div class="certification-content">
+              <h3 class="certification-title">Developing Machine Learning Solutions</h3>
+              <p class="certification-issuer">Amazon Web Services</p>
+              <p class="certification-date">Issued: 2023</p>
+              <p>Course covering building, training, and deploying machine learning models on AWS, including SageMaker and other ML services.</p>
+              <div class="certification-skills">
+                <span class="certification-skill">AWS</span>
+                <span class="certification-skill">Machine Learning</span>
+                <span class="certification-skill">SageMaker</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- AI Nexus Program Tutoring -->
+        <div class="col-lg-4 col-md-6" data-category="tutoring">
+          <div class="certification-card full-image-certificate" data-certificate="tutor-certificate">
+            <div class="certificate-preview">
+              <img src="images/tutor.jfif" alt="AI Nexus Program Certificate">
+              <div class="view-certificate">View Full Certificate</div>
+            </div>
+            <div class="certification-content">
+              <h3 class="certification-title">AI Nexus Program Facilitator</h3>
+              <p class="certification-issuer">NUST NCAI Pakistan</p>
+              <p class="certification-date">Issued: 2024</p>
+              <p>Certificate of appreciation for dedication and exceptional service as a facilitator and trainer in the AI Nexus Program 2024, awarded by NUST National Center of Artificial Intelligence (NCAI) Pakistan.</p>
+              <div class="certification-skills">
+                <span class="certification-skill">Teaching</span>
+                <span class="certification-skill">AI Education</span>
+                <span class="certification-skill">Mentoring</span>
+                <span class="certification-skill">Workshop Facilitation</span>
+                <span class="certification-skill">NUST NCAI</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificate Modal -->
+  <div class="certificate-modal" id="certificateModal">
+    <button class="close-modal" id="closeModal">&times;</button>
+    <div class="certificate-modal-content">
+      <img id="modalCertificateImage" src="" alt="Certificate">
+      <div class="certificate-details">
+        <h3 id="modalCertificateTitle"></h3>
+        <p id="modalCertificateIssuer"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Zahra Khan. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Certification Filtering
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const certificationCards = document.querySelectorAll('.col-lg-4.col-md-6');
+      const certificateModal = document.getElementById('certificateModal');
+      const closeModal = document.getElementById('closeModal');
+      const modalCertificateImage = document.getElementById('modalCertificateImage');
+      const modalCertificateTitle = document.getElementById('modalCertificateTitle');
+      const modalCertificateIssuer = document.getElementById('modalCertificateIssuer');
+      
+      // Filter functionality
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          const filterValue = this.getAttribute('data-filter');
+          
+          // Show/hide certification cards based on filter
+          certificationCards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+            
+            if (filterValue === 'all' || cardCategory === filterValue) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+      
+      // Certificate modal functionality
+      const certificationCardsElements = document.querySelectorAll('.certification-card');
+      
+      certificationCardsElements.forEach(card => {
+        card.addEventListener('click', function() {
+          const certificateType = this.getAttribute('data-certificate');
+          const certificateImage = this.querySelector('.certificate-preview img').src;
+          const certificateTitle = this.querySelector('.certification-title').textContent;
+          const certificateIssuer = this.querySelector('.certification-issuer').textContent;
+          
+          // Set modal content
+          modalCertificateImage.src = certificateImage;
+          modalCertificateTitle.textContent = certificateTitle;
+          modalCertificateIssuer.textContent = certificateIssuer;
+          
+          // Show modal
+          certificateModal.classList.add('active');
+        });
+      });
+      
+      // Close modal
+      closeModal.addEventListener('click', function() {
+        certificateModal.classList.remove('active');
+      });
+      
+      // Close modal when clicking outside the image
+      certificateModal.addEventListener('click', function(e) {
+        if (e.target === certificateModal) {
+          certificateModal.classList.remove('active');
+        }
+      });
+      
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          certificateModal.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

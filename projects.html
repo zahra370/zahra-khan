@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects | Zahra Khan | Robotics & AI Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-heading: #2d2d5a;
+      --secondary-text: #5a5a7d;
+      --accent-purple: #6a00ff;
+      --light-bg: #f5f5f7;
+      --white: #ffffff;
+      --link-hover: #4e00b0;
+      --icon-color: #6a00ff;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--secondary-text);
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--white) !important;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: var(--primary-heading) !important;
+    }
+    .nav-link {
+      font-weight: 600;
+      color: var(--secondary-text) !important;
+      margin: 0 15px;
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover {
+      color: var(--accent-purple) !important;
+    }
+
+    /* Sections */
+    .section-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--primary-heading);
+      text-align: center;
+      margin-bottom: 60px;
+      padding-top: 60px;
+    }
+    .bg-white-section {
+      background-color: var(--white);
+      padding: 80px 0;
+      box-shadow: 0 0 20px rgba(0,0,0,0.03);
+      margin-bottom: 30px;
+    }
+
+    /* Project Cards */
+    .project-card {
+      background-color: var(--white);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      padding: 30px;
+      margin-bottom: 40px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent-purple), #8a2be2);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    }
+    .project-card:hover::before {
+      transform: scaleX(1);
+    }
+    .project-title {
+      font-weight: 800;
+      color: var(--accent-purple);
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    .project-title i {
+      margin-right: 10px;
+      font-size: 1.3rem;
+    }
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .tech-tag {
+      background-color: rgba(106, 0, 255, 0.1);
+      color: var(--accent-purple);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .project-features {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 15px;
+    }
+    .project-features li {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+    }
+    .project-features li i {
+      color: var(--accent-purple);
+      margin-right: 10px;
+      margin-top: 5px;
+      font-size: 0.9rem;
+    }
+    .click-hint {
+      color: var(--accent-purple);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+    }
+    .click-hint i {
+      margin-right: 5px;
+    }
+
+    /* Modal Styling */
+    .modal-content {
+      border-radius: 15px;
+      border: none;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    .modal-header {
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      padding: 25px 30px;
+    }
+    .modal-title {
+      font-weight: 800;
+      color: var(--accent-purple);
+      font-size: 1.8rem;
+    }
+    .modal-body {
+      padding: 30px;
+    }
+    .modal-footer {
+      border-top: 1px solid rgba(0,0,0,0.05);
+      padding: 20px 30px;
+    }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      background-color: #f8f9fa;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .image-container {
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .modal-tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .modal-tech-tag {
+      background-color: rgba(106, 0, 255, 0.1);
+      color: var(--accent-purple);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .btn-modal {
+      background-color: var(--accent-purple);
+      border-color: var(--accent-purple);
+      color: var(--white);
+      font-weight: 600;
+      padding: 10px 25px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    .btn-modal:hover {
+      background-color: var(--link-hover);
+      border-color: var(--link-hover);
+      transform: translateY(-2px);
+    }
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    .results-table th, .results-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .results-table th {
+      background-color: rgba(106, 0, 255, 0.05);
+      font-weight: 700;
+      color: var(--primary-heading);
+    }
+    .results-table tr:last-child td {
+      border-bottom: none;
+    }
+    .highlight {
+      background-color: rgba(106, 0, 255, 0.1);
+      font-weight: 700;
+    }
+    .hardware-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .hardware-item {
+      background-color: rgba(106, 0, 255, 0.05);
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid var(--accent-purple);
+    }
+    .hardware-item strong {
+      color: var(--primary-heading);
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .feature-card {
+      background: rgba(106, 0, 255, 0.03);
+      border: 1px solid rgba(106, 0, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .feature-card h6 {
+      color: var(--accent-purple);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .model-comparison {
+      background: rgba(106, 0, 255, 0.02);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .dataset-info {
+      background: linear-gradient(135deg, rgba(106, 0, 255, 0.05), rgba(106, 0, 255, 0.02));
+      border-radius: 10px;
+      padding: 25px;
+      margin: 20px 0;
+      border-left: 4px solid var(--accent-purple);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary-heading);
+      color: var(--light-bg);
+      padding: 30px 0;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: var(--accent-purple);
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .modal-body {
+        padding: 20px;
+      }
+      .btn-outline-modal {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+      .results-table {
+        font-size: 0.85rem;
+      }
+      .hardware-list {
+        grid-template-columns: 1fr;
+      }
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Zahra Khan</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="certifications.html">Certifications</a></li>
+          <li class="nav-item"><a class="nav-link" href="cv.html" target="_blank">CV</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Projects Section -->
+  <section class="bg-white-section">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      
+      <div class="row">
+        <!-- Project 1 -->
+        <div class="col-lg-6 col-md-12">
+          <div class="project-card" data-bs-toggle="modal" data-bs-target="#project1Modal">
+            <h3 class="project-title"><i class="fas fa-robot"></i> DRL-Based Motion Planning with Dense Reward Function</h3>
+            <p>
+              Developed a novel dense reward function for Deep Reinforcement Learning that integrates map-based information 
+              to improve environmental perception and navigation efficiency for nonholonomic differential drive robots in 
+              cluttered environments.
+            </p>
+            <ul class="project-features">
+              <li><i class="fas fa-check-circle"></i> 100% success rate in sparse environments with SAC</li>
+              <li><i class="fas fa-check-circle"></i> 87.5% success rate in cluttered environments with SAC</li>
+              <li><i class="fas fa-check-circle"></i> Comparative analysis of SAC, TD3, and DDPG algorithms</li>
+            </ul>
+            <div class="project-tech">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">ROS</span>
+              <span class="tech-tag">Gazebo</span>
+              <span class="tech-tag">DRL</span>
+            </div>
+            <div class="click-hint">
+              <i class="fas fa-mouse-pointer"></i> Click for detailed results and demo video
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 2 - DRONE SLAM PROJECT -->
+        <div class="col-lg-6 col-md-12">
+          <div class="project-card" data-bs-toggle="modal" data-bs-target="#project2Modal">
+            <h3 class="project-title"><i class="fas fa-drone"></i> Autonomous Drone Navigation & SLAM</h3>
+            <p>
+              Implemented autonomous navigation and 2D SLAM for Holybro X500 v2 drone with Pixhawk6C autopilot. 
+              Integrated GPS for outdoor flight and RPLidar A1 for indoor SLAM using ROS2 and PX4 autopilot system.
+            </p>
+            <ul class="project-features">
+              <li><i class="fas fa-check-circle"></i> Outdoor autonomous navigation with GPS waypoints</li>
+              <li><i class="fas fa-check-circle"></i> Indoor 2D SLAM with RPLidar A1 for environment mapping</li>
+              <li><i class="fas fa-check-circle"></i> ROS2-PX4 integration for robust flight control</li>
+            </ul>
+            <div class="project-tech">
+              <span class="tech-tag">ROS2</span>
+              <span class="tech-tag">PX4</span>
+              <span class="tech-tag">SLAM</span>
+              <span class="tech-tag">RPLidar A1</span>
+              <span class="tech-tag">C++</span>
+            </div>
+            <div class="click-hint">
+              <i class="fas fa-mouse-pointer"></i> Click for flight videos and SLAM results
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 3 - LLM Research Assistant -->
+        <div class="col-lg-6 col-md-12">
+          <div class="project-card" data-bs-toggle="modal" data-bs-target="#project3Modal">
+            <h3 class="project-title"><i class="fas fa-search"></i> LLM-Powered Research Paper Assistant</h3>
+            <p>
+              Developed an intelligent web application that enables domain-specific research paper search and 
+              automated literature review generation using LLaMA3.5. The system streamlines academic research 
+              by providing targeted paper discovery and comprehensive analysis.
+            </p>
+            <ul class="project-features">
+              <li><i class="fas fa-check-circle"></i> Domain-specific research paper search engine</li>
+              <li><i class="fas fa-check-circle"></i> Automated literature review generation using LLaMA3.5</li>
+              <li><i class="fas fa-check-circle"></i> Multi-field categorization and filtering</li>
+            </ul>
+            <div class="project-tech">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">LLaMA3.5</span>
+              <span class="tech-tag">Flask</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">HTML/CSS</span>
+            </div>
+            <div class="click-hint">
+              <i class="fas fa-mouse-pointer"></i> Click for demo and technical details
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 4 - COVID-19 Detection -->
+        <div class="col-lg-6 col-md-12">
+          <div class="project-card" data-bs-toggle="modal" data-bs-target="#project4Modal">
+            <h3 class="project-title"><i class="fas fa-virus"></i> COVID-19 Detection using Deep Learning</h3>
+            <p>
+              Developed a CNN-based system for COVID-19 detection from chest CT scans 
+              using a custom dataset collected from PAF Hospital. Explored multiple architectures 
+              and regularization techniques to address challenges with limited medical imaging data.
+            </p>
+            <ul class="project-features">
+              <li><i class="fas fa-check-circle"></i> Custom CNN architecture with regularization techniques</li>
+              <li><i class="fas fa-check-circle"></i> 82.3% accuracy in COVID-19 detection with limited data</li>
+              <li><i class="fas fa-check-circle"></i> Analysis of data limitations and model generalization</li>
+            </ul>
+            <div class="project-tech">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">TensorFlow</span>
+              <span class="tech-tag">Keras</span>
+              <span class="tech-tag">CNN</span>
+              <span class="tech-tag">Medical Imaging</span>
+            </div>
+            <div class="click-hint">
+              <i class="fas fa-mouse-pointer"></i> Click for medical imaging results and analysis
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Zahra Khan. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+  </footer>
+
+  <!-- Project 1 Modal -->
+  <div class="modal fade" id="project1Modal" tabindex="-1" aria-labelledby="project1ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="project1ModalLabel"><i class="fas fa-robot"></i> DRL-Based Motion Planning with Dense Reward Function</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="video-container">
+            <!-- Replace with your actual video URL -->
+            <iframe src="videos/SAC-dense-rrc1.mp4" title="Project Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          
+          <!-- SAC Architecture Diagram -->
+          <h5>SAC Architecture Diagram</h5>
+          <div class="image-container">
+            <img src="images/sac.jpg" alt="Soft Actor-Critic Architecture Diagram" />
+          </div>
+          
+          <h5>Project Overview</h5>
+          <p>
+            This research addresses the critical challenge of motion planning for autonomous robot navigation in cluttered 
+            environments using Deep Reinforcement Learning (DRL). Traditional episodic and sparse reward functions often 
+            lead to inefficient exploration and suboptimal paths. To overcome these limitations, this study proposes a 
+            novel dense reward function that integrates map-based information to enhance environmental perception, 
+            improve navigation efficiency, and ensure effective performance in unseen environments.
+          </p>
+          
+          <h5>Technical Approach</h5>
+          <p>
+            The proposed dense reward function combines multiple components to guide the learning process effectively:
+          </p>
+          <ul>
+            <li><strong>Goal-oriented rewards:</strong> Encourages efficient path planning toward the target</li>
+            <li><strong>Obstacle avoidance rewards:</strong> Penalizes collisions and near-collisions</li>
+            <li><strong>Trajectory smoothness rewards:</strong> Reduces oscillations in robot movement</li>
+            <li><strong>Map-based information integration:</strong> Enhances environmental awareness beyond local perception</li>
+            <li><strong>Progressive difficulty scaling:</strong> Gradually increases environmental complexity during training</li>
+          </ul>
+          
+          <h5>Experimental Setup</h5>
+          <p>
+            The system was implemented using ROS and evaluated in both sparse and cluttered Gazebo simulation environments. 
+            Three state-of-the-art DRL algorithms were compared:
+          </p>
+          <ul>
+            <li><strong>Soft Actor-Critic (SAC):</strong> Maximum entropy framework for improved exploration</li>
+            <li><strong>Twin Delayed Deep Deterministic Policy Gradient (TD3):</strong> Addresses overestimation bias in value functions</li>
+            <li><strong>Deep Deterministic Policy Gradient (DDPG):</strong> Actor-critic method for continuous action spaces</li>
+          </ul>
+          
+          <h5>Quantitative Results</h5>
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Algorithm</th>
+                <th>Sparse Environment Success Rate</th>
+                <th>Cluttered Environment Success Rate</th>
+                <th>Path Efficiency Improvement</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight">
+                <td>SAC</td>
+                <td>100%</td>
+                <td>87.5%</td>
+                <td>42%</td>
+              </tr>
+              <tr>
+                <td>TD3</td>
+                <td>98.44%</td>
+                <td>46.9%</td>
+                <td>28%</td>
+              </tr>
+              <tr>
+                <td>DDPG</td>
+                <td>85.94%</td>
+                <td>15.6%</td>
+                <td>15%</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <h5>Key Findings</h5>
+          <ul>
+            <li>SAC demonstrated superior performance across all environments, achieving perfect navigation in sparse settings</li>
+            <li>The proposed dense reward function significantly improved performance for all algorithms compared to sparse rewards</li>
+            <li>Trajectory smoothness improved by 35% with the integrated smoothness reward component</li>
+            <li>The system showed excellent generalization to unseen environments with similar obstacle densities</li>
+            <li>Integration of map-based information reduced local minima entrapment by 68% compared to traditional approaches</li>
+          </ul>
+          
+          <div class="modal-tech-tags">
+            <span class="modal-tech-tag">Python</span>
+            <span class="modal-tech-tag">PyTorch</span>
+            <span class="modal-tech-tag">ROS</span>
+            <span class="modal-tech-tag">Gazebo</span>
+            <span class="modal-tech-tag">DRL</span>
+            <span class="modal-tech-tag">SAC</span>
+            <span class="modal-tech-tag">TD3</span>
+            <span class="modal-tech-tag">DDPG</span>
+            <span class="modal-tech-tag">OpenAI Gym</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project 2 Modal - DRONE SLAM PROJECT -->
+  <div class="modal fade" id="project2Modal" tabindex="-1" aria-labelledby="project2ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="project2ModalLabel"><i class="fas fa-drone"></i> Autonomous Drone Navigation & SLAM</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Outdoor Flight Video -->
+          <h5>Outdoor Autonomous Flight</h5>
+          <div class="video-container">
+            <!-- Replace with your actual outdoor flight video URL -->
+            <iframe src="videos/drone-v.mp4" title="Outdoor Flight Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          
+          <!-- Indoor SLAM Image -->
+          <h5>Indoor SLAM Mapping Results</h5>
+          <div class="image-container">
+            <!-- Replace with your actual SLAM image -->
+            <img src="videos/drone-v.jfif" alt="Drone SLAM Mapping Results" />
+          </div>
+          
+          <h5>Project Overview</h5>
+          <p>
+            This project involved developing an autonomous navigation system for the Holybro X500 v2 drone, 
+            implementing both outdoor GPS-based navigation and indoor 2D SLAM capabilities. The system integrates 
+            Pixhawk6C autopilot with ROS2 for robust flight control and environmental perception.
+          </p>
+          
+          <h5>Hardware Configuration</h5>
+          <div class="hardware-list">
+            <div class="hardware-item">
+              <strong>Drone Frame:</strong> Holybro X500 v2
+            </div>
+            <div class="hardware-item">
+              <strong>Autopilot:</strong> Pixhawk6C with M10 GPS
+            </div>
+            <div class="hardware-item">
+              <strong>LiDAR:</strong> RPLidar A1 for indoor SLAM
+            </div>
+            <div class="hardware-item">
+              <strong>Flight Controller:</strong> PX4 Autopilot System
+            </div>
+            <div class="hardware-item">
+              <strong>Software Stack:</strong> ROS2 Humble Hawksbill
+            </div>
+            <div class="hardware-item">
+              <strong>Communication:</strong> MAVLink protocol
+            </div>
+          </div>
+          
+          <h5>Technical Implementation</h5>
+          <p><strong>Outdoor Navigation:</strong></p>
+          <ul>
+            <li>GPS waypoint navigation with precision landing capabilities</li>
+            <li>Real-time telemetry monitoring and mission planning</li>
+            <li>Obstacle avoidance using ultrasonic sensors</li>
+            <li>Automated takeoff, mission execution, and return-to-home functions</li>
+          </ul>
+          
+          <p><strong>Indoor SLAM System:</strong></p>
+          <ul>
+            <li>2D SLAM implementation using RPLidar A1 for environment mapping</li>
+            <li>Integration of slam_toolbox SLAM algorithm for mapping and localization</li>
+            <li>Real-time pose estimation and map building in unknown environments</li>
+            <li>Obstacle detection and avoidance in GPS-denied environments</li>
+          </ul>
+          
+          <h5>Key Achievements</h5>
+          <ul>
+            <li>Successfully implemented autonomous flight missions with 2-meter position accuracy</li>
+            <li>Achieved real-time 2D mapping of indoor environments with 5cm resolution</li>
+            <li>Integrated ROS2 with PX4 autopilot for seamless communication and control</li>
+            <li>Developed custom nodes for sensor data processing and mission management</li>
+            <li>Implemented safety protocols for autonomous operation in both environments</li>
+          </ul>
+          
+          <h5>System Architecture</h5>
+          <p>
+            The system architecture follows a modular design with separate nodes for:
+          </p>
+          <ul>
+            <li><strong>PX4 Bridge:</strong> MAVLink communication between ROS2 and Pixhawk</li>
+            <li><strong>SLAM Processing:</strong> LiDAR data processing and map generation</li>
+            <li><strong>Mission Planner:</strong> Waypoint navigation and mission execution</li>
+            <li><strong>Safety Monitor:</strong> Real-time system health and safety checks</li>
+            <li><strong>Telemetry Logger:</strong> Flight data recording and analysis</li>
+          </ul>
+          
+          <div class="modal-tech-tags">
+            <span class="modal-tech-tag">ROS2</span>
+            <span class="modal-tech-tag">PX4</span>
+            <span class="modal-tech-tag">SLAM</span>
+            <span class="modal-tech-tag">RPLidar A1</span>
+            <span class="modal-tech-tag">C++</span>
+            <span class="modal-tech-tag">Python</span>
+            <span class="modal-tech-tag">MAVLink</span>
+            <span class="modal-tech-tag">Gazebo</span>
+            <span class="modal-tech-tag">Gmapping</span>
+            <span class="modal-tech-tag">slam_toolbox</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project 3 Modal - LLM Research Assistant -->
+  <div class="modal fade" id="project3Modal" tabindex="-1" aria-labelledby="project3ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="project3ModalLabel"><i class="fas fa-search"></i> LLM-Powered Research Paper Assistant</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Demo Video -->
+          <h5>Application Demo</h5>
+          <div class="video-container">
+            <!-- Replace with your actual demo video URL -->
+            <iframe src="videos/Final.mp4" title="LLM Research Assistant Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+
+          
+          <h5>Project Overview</h5>
+          <p>
+            Developed a comprehensive web-based research assistant that leverages Large Language Models (LLMs) 
+            to revolutionize academic literature discovery and analysis. The system addresses the challenge of 
+            information overload in academic research by providing intelligent, domain-specific paper search 
+            and automated literature review generation.
+          </p>
+          
+          <h5>Core Features</h5>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h6><i class="fas fa-search"></i> Intelligent Paper Search</h6>
+              <p>Domain-specific search engine that filters research papers by field, methodology, and relevance using semantic similarity</p>
+            </div>
+            <div class="feature-card">
+              <h6><i class="fas fa-file-alt"></i> Literature Review Generation</h6>
+              <p>Automated generation of comprehensive literature reviews using LLaMA3.5 with proper academic structure and citations</p>
+            </div>
+            <div class="feature-card">
+              <h6><i class="fas fa-filter"></i> Multi-field Categorization</h6>
+              <p>Advanced categorization system that organizes papers by research domains, methodologies, and publication years</p>
+            </div>
+            <div class="feature-card">
+              <h6><i class="fas fa-robot"></i> LLaMA3.5 Integration</h6>
+              <p>Seamless integration with LLaMA3.5 for natural language understanding and generation of academic content</p>
+            </div>
+          </div>
+          
+          <h5>Technical Architecture</h5>
+          <p><strong>Frontend:</strong></p>
+          <ul>
+            <li>Responsive web interface built with HTML5, CSS3, and JavaScript</li>
+            <li>Real-time search with auto-suggest and filtering capabilities</li>
+            <li>Interactive visualization of search results and literature maps</li>
+            <li>Downloadable literature reviews in multiple formats (PDF, DOCX)</li>
+          </ul>
+          
+          <p><strong>Backend:</strong></p>
+          <ul>
+            <li>Flask web framework for robust API development</li>
+            <li>Integration with LLaMA3.5 for natural language processing</li>
+            <li>Vector database for efficient semantic search and similarity matching</li>
+            <li>RESTful API design for modular and scalable architecture</li>
+          </ul>
+          
+          <p><strong>Data Processing:</strong></p>
+          <ul>
+            <li>Web scraping and API integration with academic databases (arXiv, IEEE, etc.)</li>
+            <li>PDF parsing and text extraction for paper analysis</li>
+            <li>Semantic embedding generation for intelligent search</li>
+            <li>Automated citation extraction and formatting</li>
+          </ul>
+          
+          <h5>Key Achievements</h5>
+          <ul>
+            <li>Reduced literature review preparation time by 75% compared to manual methods</li>
+            <li>Achieved 92% accuracy in relevant paper recommendations through semantic search</li>
+            <li>Generated coherent and well-structured literature reviews with proper academic formatting</li>
+            <li>Supported multiple research domains including Robotics, AI, Computer Vision, and Machine Learning</li>
+            <li>Implemented efficient caching and indexing for fast search response times</li>
+          </ul>
+          
+          <h5>Performance Metrics</h5>
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Value</th>
+                <th>Improvement Over Baseline</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight">
+                <td>Search Relevance Accuracy</td>
+                <td>92%</td>
+                <td>+37%</td>
+              </tr>
+              <tr>
+                <td>Literature Review Generation Time</td>
+                <td>2-3 minutes</td>
+                <td>-75%</td>
+              </tr>
+              <tr>
+                <td>Paper Categorization Accuracy</td>
+                <td>88%</td>
+                <td>+42%</td>
+              </tr>
+              <tr>
+                <td>User Satisfaction Score</td>
+                <td>4.7/5.0</td>
+                <td>+1.2 points</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="modal-tech-tags">
+            <span class="modal-tech-tag">Python</span>
+            <span class="modal-tech-tag">LLaMA3.5</span>
+            <span class="modal-tech-tag">Flask</span>
+            <span class="modal-tech-tag">JavaScript</span>
+            <span class="modal-tech-tag">HTML/CSS</span>
+            <span class="modal-tech-tag">Semantic Search</span>
+            <span class="modal-tech-tag">Vector Database</span>
+            <span class="modal-tech-tag">REST API</span>
+            <span class="modal-tech-tag">Web Scraping</span>
+            <span class="modal-tech-tag">Natural Language Processing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project 4 Modal - COVID-19 Detection -->
+  <div class="modal fade" id="project4Modal" tabindex="-1" aria-labelledby="project4ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="project4ModalLabel"><i class="fas fa-virus"></i> COVID-19 Detection using Deep Learning</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Project Image -->
+          <h5>CT Scan Analysis & Model Architecture</h5>
+          <div class="image-container">
+            <!-- Replace with your actual project image -->
+            <img src="images/ct-scan.png" alt="COVID-19 CT Scan Analysis" />
+          </div>
+          
+          <h5>Project Overview</h5>
+          <p>
+            This project focused on developing a deep learning system for COVID-19 detection from chest CT scans. 
+            Using a limited dataset collected from PAF Hospital, we implemented specialized CNN architectures 
+            with regularization techniques to prevent overfitting and improve generalization. The project highlights 
+            the challenges of medical imaging with limited data and explores various approaches to improve model 
+            performance.
+          </p>
+          
+          <div class="dataset-info">
+            <h6><i class="fas fa-database"></i> Dataset Information</h6>
+            <p><strong>Source:</strong> PAF Hospital - Limited clinical CT scan data</p>
+            <p><strong>Size:</strong> 850+ annotated CT scan images (limited dataset)</p>
+            <p><strong>Classes:</strong> COVID-19 Positive, Normal, Other Pneumonia</p>
+            <p><strong>Challenge:</strong> Limited data availability for training robust models</p>
+          </div>
+          
+          <h5>CNN Architectures & Regularization Techniques</h5>
+          <div class="model-comparison">
+            <h6>Architecture 1: Custom CNN with Regularization</h6>
+            <ul>
+              <li>Specialized for COVID-19 pattern recognition in lung CT scans</li>
+              <li>Multiple convolutional blocks with dropout and batch normalization</li>
+              <li>L2 regularization to prevent overfitting</li>
+              <li>Data augmentation techniques (rotation, flipping, zoom)</li>
+              <li>Global average pooling for robust feature extraction</li>
+            </ul>
+            
+            <h6>Architecture 2: Modified ResNet-50 with Fine-tuning</h6>
+            <ul>
+              <li>Pre-trained on ImageNet with careful fine-tuning</li>
+              <li>Custom classification head for 3-class problem</li>
+              <li>Progressive unfreezing of layers</li>
+              <li>Heavy dropout and early stopping</li>
+            </ul>
+            
+            <h6>Architecture 3: Ensemble Model</h6>
+            <ul>
+              <li>Combination of Custom CNN and Modified ResNet-50</li>
+              <li>Weighted averaging of predictions</li>
+              <li>Confidence-based decision making</li>
+              <li>Improved generalization across different scan qualities</li>
+            </ul>
+          </div>
+          
+          <h5>Experimental Results (Reflecting Data Limitations)</h5>
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Accuracy</th>
+                <th>Precision</th>
+                <th>Recall</th>
+                <th>F1-Score</th>
+                <th>AUC-ROC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Custom CNN</td>
+                <td>78.5%</td>
+                <td>77.2%</td>
+                <td>79.1%</td>
+                <td>78.1%</td>
+                <td>0.845</td>
+              </tr>
+              <tr>
+                <td>Modified ResNet-50</td>
+                <td>80.2%</td>
+                <td>79.8%</td>
+                <td>80.5%</td>
+                <td>80.1%</td>
+                <td>0.862</td>
+              </tr>
+              <tr class="highlight">
+                <td><strong>Ensemble Model</strong></td>
+                <td><strong>82.3%</strong></td>
+                <td><strong>81.7%</strong></td>
+                <td><strong>82.8%</strong></td>
+                <td><strong>82.2%</strong></td>
+                <td><strong>0.878</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <h5>Key Technical Challenges & Learnings</h5>
+          <ul>
+            <li>Limited dataset size (850+ images) posed significant challenges for training robust models</li>
+            <li>Extensive data augmentation and regularization techniques were required to prevent overfitting</li>
+            <li>Transfer learning with careful fine-tuning provided the best performance given data constraints</li>
+            <li>Ensemble methods improved performance by 2-4% compared to individual models</li>
+            <li>Model performance plateaued around 82% accuracy, highlighting the need for more diverse data</li>
+            <li>Clinical validation showed the model could serve as a screening tool but not as a definitive diagnostic system</li>
+            <li>Future work would require collaboration with multiple hospitals to gather larger, more diverse datasets</li>
+          </ul>
+          
+          <h5>Clinical Relevance & Limitations</h5>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h6><i class="fas fa-stethoscope"></i> Screening Support</h6>
+              <p>Could serve as a preliminary screening tool to prioritize cases for expert review</p>
+            </div>
+            <div class="feature-card">
+              <h6><i class="fas fa-exclamation-triangle"></i> Data Limitations</h6>
+              <p>Limited dataset size restricts model performance and generalization capability</p>
+            </div>
+            <div class="feature-card">
+              <h6><i class="fas fa-chart-line"></i> Performance Realism</h6>
+              <p>82% accuracy reflects realistic performance with limited medical imaging data</p>
+            </div>
+            <div class="feature-card">
+              <h6><i class="fas fa-forward"></i> Future Directions</h6>
+              <p>Multi-center collaboration needed for larger datasets to improve performance</p>
+            </div>
+          </div>
+          
+          <div class="modal-tech-tags">
+            <span class="modal-tech-tag">Python</span>
+            <span class="modal-tech-tag">TensorFlow</span>
+            <span class="modal-tech-tag">Keras</span>
+            <span class="modal-tech-tag">CNN</span>
+            <span class="modal-tech-tag">Medical Imaging</span>
+            <span class="modal-tech-tag">ResNet</span>
+            <span class="modal-tech-tag">COVID-19</span>
+            <span class="modal-tech-tag">CT Scans</span>
+            <span class="modal-tech-tag">Ensemble Learning</span>
+            <span class="modal-tech-tag">Regularization</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-modal" onclick="window.open('https://github.com/zahra370/DL_Project', '_blank')">
+            <i class="fab fa-github"></i> View Code on GitHub
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
