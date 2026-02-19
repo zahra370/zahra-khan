@@ -354,7 +354,7 @@
           <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
           <li class="nav-item"><a class="nav-link" href="index.html#research">Research</a></li>
           <!-- <li class="nav-item"><a class="nav-link active" href="ms-thesis.html">MS Thesis</a></li> -->
-          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link active" href="projects.html">Projects</a></li>
           <li class="nav-item"><a class="nav-link" href="certifications.html">Certifications</a></li>
           <li class="nav-item"><a class="nav-link" href="cv.html" target="_blank">CV</a></li>
           <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
@@ -472,6 +472,32 @@
             </div>
             <div class="click-hint">
               <i class="fas fa-mouse-pointer"></i> Click for medical imaging results and analysis
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5 - Pashto Voice Assistant (updated description) -->
+        <div class="col-lg-6 col-md-12">
+          <div class="project-card" data-bs-toggle="modal" data-bs-target="#project5Modal">
+            <h3 class="project-title"><i class="fas fa-language"></i> Pashto Voice Assistant</h3>
+            <p>
+              An end‑to‑end conversational AI system enabling Pashto speakers (43.6M+ in Pakistan) to interact naturally with technology in their native language. The assistant understands Pashto speech, reasons with LLMs, and responds in spoken Pashto. It also empowers cross‑language communication for non‑Pashto speakers, bridging digital inclusion gaps.
+            </p>
+            <ul class="project-features">
+              <li><i class="fas fa-check-circle"></i> Pashto ASR + LLM reasoning + Pashto TTS – full voice pipeline</li>
+              <li><i class="fas fa-check-circle"></i> Real‑time, private, in‑memory processing (no audio saved)</li>
+              <li><i class="fas fa-check-circle"></i> GPU‑accelerated, built with Flask & PyTorch</li>
+            </ul>
+            <div class="project-tech">
+              <span class="tech-tag">Flask</span>
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">ASR</span>
+              <span class="tech-tag">LLM</span>
+              <span class="tech-tag">TTS</span>
+              <span class="tech-tag">CUDA</span>
+            </div>
+            <div class="click-hint">
+              <i class="fas fa-mouse-pointer"></i> Click for demo video and full project story
             </div>
           </div>
         </div>
@@ -988,86 +1014,137 @@
     </div>
   </div>
 
+  <!-- Project 5 Modal - Pashto Voice Assistant (new inspiring description) -->
+  <div class="modal fade" id="project5Modal" tabindex="-1" aria-labelledby="project5ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="project5ModalLabel"><i class="fas fa-language"></i> Pashto Voice Assistant</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Demo video (filename: pahto-voice-assistant-final.mp4) -->
+          <h5>Interactive Demo</h5>
+          <div class="video-container">
+            <video id="project5Video" controls>
+              <source src="videos/pahto-voice-assistant-final.mp4" type="video/mp4">
+              Your browser does not support the video tag. Please place the demo video at <code>videos/pahto-voice-assistant-final.mp4</code>
+            </video>
+          </div>
+
+          <!-- Block diagram image (filename: pashto-voice-assistant.jpg) -->
+          <h5>System Architecture</h5>
+          <div class="image-container">
+            <img src="images/pashto-voice-assistant.jpg" alt="Pashto Voice Assistant block diagram" />
+          </div>
+
+          <h5>End-to-End Pashto Voice Assistant</h5>
+          <p>
+            The Pashto Voice Assistant is a fully integrated, end-to-end conversational AI system designed to enable natural voice interaction in Pashto — a language spoken by over 43.6 million native speakers (~17%) in Pakistan, where the total population exceeds 255 million.
+          </p>
+          <p>
+            Despite millions of Pashto speakers, most modern AI assistants lack proper support for Pashto, limiting accessibility and digital inclusion. This project was developed to bridge that gap by creating a complete voice-based AI pipeline that allows Pashto speakers to communicate with intelligent AI systems in their native language for everyday tasks, information access, and real-time conversations.
+          </p>
+          <p>
+            The system converts Pashto speech into text using a deep learning-based ASR model, processes user intent using advanced large language models, and generates intelligent responses that are translated back into Pashto and delivered as natural-sounding voice output. This enables seamless, human-like conversations entirely in Pashto.
+          </p>
+          <p>
+            Additionally, the assistant can also be used by non-Pashto speakers to live translate and understand Pashto speech, making it a powerful tool for cross-language communication, accessibility, and collaboration.
+          </p>
+          <p>
+            This project represents a complete real-world deployment of multilingual speech AI, combining speech recognition, machine translation, LLM reasoning, and Pashto speech synthesis into a unified, scalable solution. It demonstrates how modern AI can empower underrepresented language communities and make intelligent technology accessible to millions of Pashto speakers.
+          </p>
+
+          <h5>Key Features</h5>
+          <ul>
+            <li><strong>Native Pashto voice interaction:</strong> Ask questions, get spoken answers – all in Pashto.</li>
+            <li><strong>Cross‑language support:</strong> Non-Pashto speakers can also use the system to understand Pashto speech through real-time English translation.</li>
+            <li><strong>Privacy‑first:</strong> All processing happens in memory; no audio files are ever saved.</li>
+            <li><strong>GPU‑accelerated:</strong> Runs on NVIDIA RTX A6000 with CUDA 12.6 for fast inference (5‑9 seconds end‑to‑end).</li>
+            <li><strong>Two input modes:</strong> Live recording or file upload.</li>
+            <li><strong>Fully open source:</strong> Built with Flask, PyTorch, Hugging Face, Ollama, and modern web technologies.</li>
+          </ul>
+
+          <h5>Performance Snapshot</h5>
+          <table class="results-table">
+            <thead><tr><th>Stage</th><th>Time (approx)</th></tr></thead>
+            <tbody>
+              <tr><td>Speech Recognition</td><td>2‑3 sec</td></tr>
+              <tr><td>Translation + LLM Reasoning</td><td>2‑4 sec</td></tr>
+              <tr><td>Speech Synthesis</td><td>1‑2 sec</td></tr>
+              <tr class="highlight"><td><strong>Total</strong></td><td><strong>5‑9 sec</strong></td></tr>
+            </tbody>
+          </table>
+
+          <p>
+            Full source code, setup instructions, and pretrained models are available on GitHub. This project is actively used to help Pashto speakers across Pakistan communicate more freely, and it continues to evolve with community feedback.
+          </p>
+
+          <div class="modal-tech-tags">
+            <span class="modal-tech-tag">Flask</span>
+            <span class="modal-tech-tag">PyTorch</span>
+            <span class="modal-tech-tag">ASR</span>
+            <span class="modal-tech-tag">LLM</span>
+            <span class="modal-tech-tag">TTS</span>
+            <span class="modal-tech-tag">CUDA</span>
+            <span class="modal-tech-tag">Python</span>
+            <span class="modal-tech-tag">JavaScript</span>
+            <span class="modal-tech-tag">HTML/CSS</span>
+            <span class="modal-tech-tag">Ollama</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-modal" onclick="window.open('https://github.com/zahra370/Pashto-Voice-Assistant', '_blank')">
+            <i class="fab fa-github"></i> View Code on GitHub
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     // Video control for project modals
     document.addEventListener('DOMContentLoaded', function() {
-      // Get all project modals
       const project1Modal = document.getElementById('project1Modal');
       const project2Modal = document.getElementById('project2Modal');
       const project3Modal = document.getElementById('project3Modal');
+      const project5Modal = document.getElementById('project5Modal');
       
-      // Get video elements
       const project1Video = document.getElementById('project1Video');
       const project2Video = document.getElementById('project2Video');
       const project3Video = document.getElementById('project3Video');
+      const project5Video = document.getElementById('project5Video');
       
-      // Function to play video
       function playVideo(videoElement) {
-        if (videoElement) {
-          videoElement.play().catch(error => {
-            console.log('Video play failed:', error);
-          });
-        }
+        if (videoElement) videoElement.play().catch(() => {});
       }
-      
-      // Function to pause video
       function pauseVideo(videoElement) {
-        if (videoElement) {
-          videoElement.pause();
-        }
+        if (videoElement) videoElement.pause();
       }
-      
-      // Function to reset video
       function resetVideo(videoElement) {
-        if (videoElement) {
-          videoElement.currentTime = 0;
-        }
+        if (videoElement) videoElement.currentTime = 0;
       }
       
-      // Project 1 Modal events
       if (project1Modal && project1Video) {
-        project1Modal.addEventListener('show.bs.modal', function() {
-          resetVideo(project1Video);
-        });
-        
-        project1Modal.addEventListener('shown.bs.modal', function() {
-          playVideo(project1Video);
-        });
-        
-        project1Modal.addEventListener('hide.bs.modal', function() {
-          pauseVideo(project1Video);
-        });
+        project1Modal.addEventListener('show.bs.modal', () => resetVideo(project1Video));
+        project1Modal.addEventListener('shown.bs.modal', () => playVideo(project1Video));
+        project1Modal.addEventListener('hide.bs.modal', () => pauseVideo(project1Video));
       }
-      
-      // Project 2 Modal events
       if (project2Modal && project2Video) {
-        project2Modal.addEventListener('show.bs.modal', function() {
-          resetVideo(project2Video);
-        });
-        
-        project2Modal.addEventListener('shown.bs.modal', function() {
-          playVideo(project2Video);
-        });
-        
-        project2Modal.addEventListener('hide.bs.modal', function() {
-          pauseVideo(project2Video);
-        });
+        project2Modal.addEventListener('show.bs.modal', () => resetVideo(project2Video));
+        project2Modal.addEventListener('shown.bs.modal', () => playVideo(project2Video));
+        project2Modal.addEventListener('hide.bs.modal', () => pauseVideo(project2Video));
       }
-      
-      // Project 3 Modal events
       if (project3Modal && project3Video) {
-        project3Modal.addEventListener('show.bs.modal', function() {
-          resetVideo(project3Video);
-        });
-        
-        project3Modal.addEventListener('shown.bs.modal', function() {
-          playVideo(project3Video);
-        });
-        
-        project3Modal.addEventListener('hide.bs.modal', function() {
-          pauseVideo(project3Video);
-        });
+        project3Modal.addEventListener('show.bs.modal', () => resetVideo(project3Video));
+        project3Modal.addEventListener('shown.bs.modal', () => playVideo(project3Video));
+        project3Modal.addEventListener('hide.bs.modal', () => pauseVideo(project3Video));
+      }
+      if (project5Modal && project5Video) {
+        project5Modal.addEventListener('show.bs.modal', () => resetVideo(project5Video));
+        project5Modal.addEventListener('shown.bs.modal', () => playVideo(project5Video));
+        project5Modal.addEventListener('hide.bs.modal', () => pauseVideo(project5Video));
       }
     });
   </script>
